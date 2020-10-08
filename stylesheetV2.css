@@ -1,6 +1,7 @@
 body{
     margin: 0;
     padding: 0;
+    max-width: 2000px;
 }
 
 body a{
@@ -500,15 +501,11 @@ button:hover{
 }
 
 #aboutbios img{
-    height: 200px;
-    width: 200px;
+    max-width: 200px;
+    max-height: 200px;
     margin: 0px;
     border: 1px solid rebeccapurple;
     padding: 2px;
-    vertical-align: top;
-    display: inline;
-    float: left;
-    clear: left;
     margin-right: 20px;
 }
 
