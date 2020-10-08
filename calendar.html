@@ -1,0 +1,842 @@
+<html>
+    <head>
+    <title>Dynamite Rhythm - Calendar</title> 
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="shortcut icon" href="images/DynamiteLogo.png">
+    <link rel="stylesheet" type ="text/css" href="stylesheetV2.css"/>
+        
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        
+        
+        <script>
+            //define variables
+            var month_index;
+            var gig_dates;
+            var gig_info;
+            var months;
+        $(document).ready(function(){
+            month_index = 0;
+            //create list of dates on calendar that are denoted as gigs
+            gig_dates = document.getElementsByClassName("gig");
+            //create a list of all of the corresponding information to match up on click
+            gig_info = document.getElementsByClassName("gig-info");
+            //create list of months
+            months = document.getElementsByClassName("calendar");
+            
+            $(months[month_index]).addClass("current");
+            
+            //apply function to make element active if clicked
+            for (let i = 0; i < gig_dates.length; i++) {
+                $(gig_dates[i]).click(function(){ 
+                   //remove all selections then place the new one
+                    for(let j = 0; j < gig_dates.length; j++){
+                       if (j != i){ $(gig_dates[j]).removeClass('selected');
+                    }
+                    }
+                    
+                    $(gig_dates[i]).toggleClass('selected');
+                    $(gig_info[i]).toggleClass('active').siblings().removeClass('active');
+                });
+            }
+            
+        });
+            
+            function prev_month(){
+                if(month_index > 0){
+                    //remove all selections and active shown
+                    for(let j = 0; j < gig_dates.length; j++){
+                        $(gig_dates[j]).removeClass('selected');
+                        $(gig_info[j]).removeClass('active');
+                        
+                    }
+                    //remove current month from screen
+             $(months[month_index]).removeClass("current");
+                    //adjust index accordingly
+                month_index = month_index - 1;
+                    
+                } $(months[month_index]).addClass("current");
+            };
+            function next_month(){
+                if(month_index < months.length - 1){
+                    //remove all selections and active shown
+                    for(let j = 0; j < gig_dates.length; j++){
+                        $(gig_dates[j]).removeClass('selected');
+                        $(gig_info[j]).removeClass('active');
+                        
+                    }
+                    //remove current month from screen
+                    $(months[month_index]).removeClass("current");
+                    
+                    //adjust index accordingly
+                    month_index++;  
+                } 
+             $(months[month_index]).addClass("current");
+            };
+            
+        </script>
+        
+</head>
+<body>
+   <header class="index">
+       <a href="index.html"><img src="images/DynamiteLogo.png" width="100px"></a>
+       <a class=burger-nav></a>
+           <div class="navbarcontainer2">
+            <div class="navbar2">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><a href="calendar.html">Calendar</a></li>
+                    <li><a href="media.html">Photo Gallery</a></li>
+                    <li><a href="about.html">About the Band</a></li>
+                    <li><a href="songs.html">Song List</a></li>
+                    <li><a href="contactus.php">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    
+    <script src="jquery.min.js"></script>
+    <script src="menu.js"></script>
+    
+   <!-- list all months visible on calendar --> 
+    
+    <div id="calendarcontainer">
+        <div class="calendar">
+        <div class="month"><button class = "prev-month" onclick = "prev_month()">&laquo;</button><strong>April 2020</strong><button class = "next-month" onclick = "next_month()">&raquo;</button></div>
+            <table>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                    <td>24</td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                    <td>30</td>
+                    <td></td>
+                </tr>
+            </table>
+    
+        </div>
+        
+    
+    <div class="calendar">
+        <div class="month"><button class = "prev-month" onclick = "prev_month()">&laquo;</button><strong>May 2020</strong><button class = "next-month" onclick = "next_month()">&raquo;</button></div>
+            <table>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td class = 'gig'>9</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>24</td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td>24</td>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td>31</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+    
+        </div>
+    
+    <div class="calendar">
+        <div class="month"><button class = "prev-month" onclick = "prev_month()">&laquo;</button><strong>June 2020</strong><button class = "next-month" onclick = "next_month()">&raquo;</button></div>
+            <table>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                    <td>24</td>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                </tr>
+                <tr>
+                    <td>28</td>
+                    <td>29</td>
+                    <td>30</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+    
+        </div>
+    
+    <div class="calendar">
+        <div class="month"><button class = "prev-month" onclick = "prev_month()">&laquo;</button><strong>July 2020</strong><button class = "next-month" onclick = "next_month()">&raquo;</button></div>
+            <table>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td class = 'gig'>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>18</td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                    <td>24</td>
+                    <td>25</td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                    <td class = 'gig'>30</td>
+                    <td class = 'gig'>31</td>
+                    <td></td>
+                </tr>
+            </table>
+    
+        </div>
+    
+    <div class="calendar">
+        <div class="month"><button class = "prev-month" onclick = "prev_month()">&laquo;</button><strong>August 2020</strong><button class = "next-month" onclick = "next_month()">&raquo;</button></div>
+            <table>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td class = 'gig'>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                    <td class = 'gig'>22</td>
+                </tr>
+                <tr>
+                    <td class = 'gig'>23</td>
+                    <td>24</td>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td>31</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+    
+        </div>
+    
+    <div class="calendar">
+        <div class="month"><button class = "prev-month" onclick = "prev_month()">&laquo;</button><strong>September 2020</strong><button class = "next-month" onclick = "next_month()">&raquo;</button></div>
+            <table>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td class = 'gig'>12</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                    <td>24</td>
+                    <td>25</td>
+                    <td>26</td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                    <td>30</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+    
+        </div>
+    
+    <div class="calendar">
+        <div class="month"><button class = "prev-month" onclick = "prev_month()">&laquo;</button><strong>October 2020</strong><button class = "next-month" onclick = "next_month()">&raquo;</button></div>
+            <table>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>1</td>
+                    <td class = 'gig'>2</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                    <td>24</td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                    <td>30</td>
+                    <td>31</td>
+                </tr>
+            </table>
+    
+        </div>
+    
+    <div class="calendar">
+        <div class="month"><button class = "prev-month" onclick = "prev_month()">&laquo;</button><strong>November 2020</strong><button class = "next-month" onclick = "next_month()">&raquo;</button></div>
+            <table>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td>23</td>
+                    <td>24</td>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                    <td>30</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+    
+        </div>
+    
+    <div class="calendar">
+        <div class="month"><button class = "prev-month" onclick = "prev_month()">&laquo;</button><strong>December 2020</strong><button class = "next-month" onclick = "next_month()">&raquo;</button></div>
+            <table>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                    <td>24</td>
+                    <td>25</td>
+                    <td>26</td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                    <td>30</td>
+                    <td>31</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+    
+        </div>
+        
+        </div>
+        
+    
+    <!-- list all gigs in order using the correct class -->
+    
+    <div class = gig-info>
+                <div class = event-name>
+                    <h1>Unknown Event</h1>
+                </div>
+                <div class = time>
+                    <h2>time tba</h2>
+                </div>
+                <div class = info>
+                </div>
+                <div class = location>
+                    <p>location coming soon!</p>
+                </div>
+                </div>
+    
+    <div class = gig-info>
+                <div class = event-name>
+                    <h1>Parmalee Farm</h1>
+                </div>
+                <div class = time>
+                    <h2>6 pm</h2>
+                </div>
+                <div class = info>
+                    <p>Free and open to the public! Join us for a fun evening!</p>
+                </div>
+                <div class = location>
+                    <p>Parmalee Farm</p>
+                    <p>475 Higganum Rd.</p>
+                    <p>Killingworth, CT 06419</p>
+                </div>
+                </div>
+    
+    <div class = gig-info>
+                <div class = event-name>
+                    <h1>Alternatives Summer Concert Series</h1>
+                </div>
+                <div class = time>
+                    <h2>6 pm</h2>
+                </div>
+                <div class = info>
+                    <p>Free and open to the public!</p>
+                </div>
+                <div class = location>
+                    <p>Alternatives Whitin Mill</p>
+                    <p>50 Douglas Rd.</p>
+                    <p>Whitinsville, MA 01588</p>
+                </div>
+                </div>
+    
+    <div class = gig-info>
+                <div class = event-name>
+                    <h1>Tockwotton Outdoor Concert</h1>
+                </div>
+                <div class = time>
+                    <h2>7 pm</h2>
+                </div>
+                <div class = info>
+                    <p>Free and open to the public! BYO lawn-chair!</p>
+                </div>
+                <div class = location>
+                    <p>Tockwotton on the Waterfront</p>
+                    <p>500 Waterfront Dr.</p>
+                    <p>East Providence, RI</p>
+                </div>
+                </div>
+    
+    <div class = gig-info>
+                <div class = event-name>
+                    <h1>Killingly Park Summer Series</h1>
+                </div>
+                <div class = time>
+                    <h2>6 pm</h2>
+                </div>
+                <div class = info>
+                    <p>Free and open to the public! Bring your dancing shoes! Raindate 8/13. </p>
+                </div>
+                <div class = location>
+                    <p>Killingly, CT</p>
+                </div>
+                </div>
+    
+     <div class = gig-info>
+                <div class = event-name>
+                    <h1>Unknown Event</h1>
+                </div>
+                <div class = time>
+                    <h2>time tba</h2>
+                </div>
+                <div class = info>
+                    <p>Details coming soon.</p>
+                </div>
+                <div class = location>
+                    <p>Location tba</p>
+                </div>
+                </div>
+    
+    <div class = gig-info>
+                <div class = event-name>
+                    <h1>VW Car Show</h1>
+                </div>
+                <div class = time>
+                    <h2>12 pm</h2>
+                </div>
+                <div class = info>
+                    <p>Enter the show with your car or as a spectator. Fun for the whole family with great cars and great music!</p>
+                </div>
+                <div class = location>
+                    <p>Diamond Hill State Park</p>
+                    <p>4097 Diamond Hill Rd.</p>
+                    <p>Cumberland, RI 02864</p>
+                </div>
+                </div>
+    
+    <div class = gig-info>
+                <div class = event-name>
+                    <h1>Alternatives Annual Valley Bag Toss</h1>
+                </div>
+                <div class = time>
+                    <h2>12 pm</h2>
+                </div>
+                <div class = info>
+                    <p>Enter the competition with a team, or just come enjoy the music as a spectator!</p>
+                </div>
+                <div class = location>
+                    <p>Alternatives Whitin Mill</p>
+                    <p>50 Douglas Rd.</p>
+                    <p>Whitinsville, MA 01588</p>
+                </div>
+                </div>
+
+
+     <div class = gig-info>
+                <div class = event-name>
+                    <h1>Tockwotton Annual Auction</h1>
+                </div>
+                <div class = time>
+                    <h2>5 pm</h2>
+                </div>
+                <div class = info>
+                    <p>Private event, sorry. We'll catch you next time!</p>
+                </div>
+                <div class = location>
+                    <p>Tockwotton on the Waterfront</p>
+                    <p>500 Waterfront Dr.</p>
+                    <p>East Providence, RI</p>
+                </div>
+                </div>
+    
+    
+    
+    <!-- footer -->
+    
+    <footer>
+        <div id="footerlist">
+        <ul>
+   <li> <a href="https://www.facebook.com/dynamiterhythm/" target="_blank"><img src="images/newFBicon.png"></a></li>
+       <li> <a href="https://www.instagram.com/dynamiterhythm/" target="_blank"><img src="images/instagram.png"></a></li>
+            </ul>
+            </div>
+        
+        <div id="graybar">
+            
+        </div>
+    </footer>
+
+    
+    </body>
+</html>
