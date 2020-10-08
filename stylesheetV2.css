@@ -2,6 +2,7 @@ body{
     margin: 0;
     padding: 0;
     max-width: 2000px;
+    align-items: center;
 }
 
 body a{
