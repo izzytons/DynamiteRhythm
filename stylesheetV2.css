@@ -769,8 +769,12 @@ button[type=submit]:hover
         padding: 0;
     }
     
+    #aboutimg{
+        margin-top: 30px;
+    }
+    
     #aboutimg.open{
-        margin-top: 300px;
+        margin-top: 315px;
     }
     
     #songlist{
@@ -845,6 +849,22 @@ button[type=submit]:hover
     .contact_div.open{
         margin-top: 250px;
     }
+    
+    .bio p{
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 550px)
+{   
+    .bio{
+        flex-direction: column;
+    }
+    
+    .bio p{
+        margin: 10px 0;
+    }
+    
 }
 
 
