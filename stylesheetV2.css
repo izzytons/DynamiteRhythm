@@ -451,7 +451,6 @@ button:hover{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     width: 100%;
 }
 
@@ -459,6 +458,8 @@ button:hover{
     display:flex;
     width: 100%;
     min-height: calc(100vh - 75px);
+    max-width: 2000px;
+    margin: auto;
     
 }
 
@@ -470,6 +471,10 @@ button:hover{
 .contact-picture img{
    width: 100%;
     margin-top: 110px;
+}
+
+.contact_div h2{
+    margin-top: 200px;
 }
 
 
