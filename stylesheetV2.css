@@ -1,8 +1,6 @@
 body{
     margin: 0;
     padding: 0;
-    max-width: 2000px;
-    align-items: center;
 }
 
 body a{
@@ -79,7 +77,8 @@ header img{
 }
 
 footer{
-    width: 100%;
+    width: 100vw;
+    margin: 0;
     position: relative;
     height: 60px;
 }
@@ -123,6 +122,8 @@ footer ul li img:hover{
 
 #indexcontainer{
     min-height: calc(100% - 75px);
+    max-width: 2000px;
+    margin: auto;
 }
 
 #bodypic{
@@ -478,9 +479,9 @@ button:hover{
 /*about*/
 
 #aboutbody{
-    width: 100%;
-    display: inline;
-    max-height: calc(100% - 75px);
+    margin: auto;
+    min-height: calc(100% - 75px);
+    max-width: 2000px;
 }
 
 #aboutbody img{
