@@ -867,6 +867,10 @@ button[type=submit]:hover
     .bio p{
         margin: 0;
     }
+    
+    video{
+        width: 80%;
+    }
 }
 
 @media only screen and (max-width: 550px)
