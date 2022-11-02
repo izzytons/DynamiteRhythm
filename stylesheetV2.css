@@ -327,7 +327,8 @@ td.selected{
     box-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.4);
     display: flex;
     border-radius: 8px;
-    margin: 32px 0;
+    margin: 32px auto;
+    max-width: 80vw;
 }
 
 .event .event_left{
@@ -358,10 +359,12 @@ td.selected{
     flex-direction: column;
     justify-content: center;
     padding: 0 24px;
+    width: 100%;
 }
 
 .event .event_right h3.event_title{
     font-size: 24px;
+    font-family: sans-serif;
     margin: 24px 0 10px 0;
     color: black;
     text-transform: uppercase;
@@ -384,6 +387,11 @@ td.selected{
     padding-right: 8px;
     
 }
+
+.event, .time, .info, .location{
+    text-align: center;
+}
+
 
 /*contact us html page
 .contact_us_container{
