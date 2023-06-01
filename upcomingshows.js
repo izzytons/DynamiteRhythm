@@ -29,7 +29,6 @@ CreateCalendarObject = function(gig){
     const eventTitle = document.createElement("h3");
     const eventDescription = document.createElement("div");
     const eventTime = document.createElement("div");
-    const timeImage = document.createElement("img");
     const descParagraph = document.createElement("p");
     const locationParagraph = document.createElement("p");
 
@@ -42,7 +41,6 @@ CreateCalendarObject = function(gig){
     eventTitle.classList.add("event_title");
     eventDescription.classList.add("event_description");
     eventTime.classList.add("event_time");
-    timeImage.src = "images/time.png";
 
     eventContainer.appendChild(event);
     event.appendChild(eventLeft);
@@ -54,7 +52,6 @@ CreateCalendarObject = function(gig){
     eventRight.appendChild(eventTitle);
     eventRight.appendChild(eventDescription);
     eventRight.appendChild(eventTime);
-    eventTime.appendChild(timeImage);
     eventDescription.appendChild(descParagraph);
     eventDescription.appendChild(locationParagraph);
 
@@ -62,7 +59,8 @@ CreateCalendarObject = function(gig){
     const gigDateAndTime = new Date(gig.DateAndTime);
     eventDay.innerHTML = gigDateAndTime.getDay();
     eventMonth.innerHTML = monthNames[gigDateAndTime.getMonth()];
-    eventTime.innerHTML = gigDateAndTime.toLocaleString('en-us', {
+    eventTime.innerHTML = "<img src=images/time.png alt=\"\" />";
+    eventTime.innerHTML += gigDateAndTime.toLocaleString('en-us', {
         hour: 'numeric',
         minute: 'numeric',
         hour12: true
