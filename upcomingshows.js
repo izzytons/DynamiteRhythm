@@ -74,22 +74,47 @@ CreateCalendarObject = function(gig){
 PopulateCalendarPage = function(gigs){
     const eventContainer = document.getElementById("event_container");
 
-    // Group gigs by year
-    const groupedGigs = GroupByYear(gigs);
-    console.log(`Gigs grouped by year: ${JSON.stringify(groupedGigs)}`);
-
-    groupedGigs.forEach((group) => {
-        // Create header for year
-        const yearHeader = document.createElement("h3");
-        yearHeader.classList.add("year");
-        yearHeader.innerHTML = group[0];
-        eventContainer.appendChild(yearHeader);
-
-        // Add calendar objects for each gig in given year (group key)
-        group[1].forEach((currentGig) => {
-            CreateCalendarObject(currentGig)
-        });
+    // Filter out past gigs
+    const currentDate = new Date();
+    currentDate.setHours(0,0,0,0); //reset the time for date comparison regardless of time
+    const futureGigs = gigs.filter((x) => { 
+        const gigDate = new Date(x.DateAndTime).setHours(0,0,0,0);
+        return gigDate >= currentDate;
     });
+
+    console.log(`future gigs: ${JSON.stringify(futureGigs)}`);
+
+    // Construct page differently if no future gigs
+    if (futureGigs.length == 0){
+        // Create new div with informational text
+        const noGigsDiv = document.createElement("div");
+        const firstLine = document.createElement("h1");
+        const secondLine = document.createElement("h1");
+        firstLine.innerHTML = "We have no upcoming gigs at the moment.";
+        secondLine.innerHTML = "More coming soon!";
+        noGigsDiv.appendChild(firstLine);
+        noGigsDiv.appendChild(secondLine);
+        noGigsDiv.style.textAlign = "center";
+        eventContainer.appendChild(noGigsDiv);
+    } 
+    else{
+        // Group gigs by year
+        const groupedGigs = GroupByYear(futureGigs);
+        console.log(`Gigs grouped by year: ${JSON.stringify(groupedGigs)}`);
+
+        groupedGigs.forEach((group) => {
+            // Create header for year
+            const yearHeader = document.createElement("h3");
+            yearHeader.classList.add("year");
+            yearHeader.innerHTML = group[0];
+            eventContainer.appendChild(yearHeader);
+
+            // Add calendar objects for each gig in given year (group key)
+            group[1].forEach((currentGig) => {
+                CreateCalendarObject(currentGig)
+            });
+        });
+    }
 }
 
 // Function to group gig list by year

@@ -32,7 +32,6 @@
     <script>        
         window.onload = async () => {
             const gigs = await GetGigs();
-            console.log(gigs);
             console.log(`Gigs retrieved from API: ${JSON.stringify(gigs)}`);
             PopulateCalendarPage(gigs);
         }      
