@@ -385,6 +385,21 @@ td.selected{
     
 }
 
+.modification-buttons{
+    display: flex;
+    flex-direction: row; 
+    margin-top: -40px;
+    padding-bottom: 40px;  
+}
+
+.modification-buttons button{
+    background-color: grey;
+}
+
+#deletegig-button{
+    background-color: red;
+}
+
 /*contact us html page
 .contact_us_container{
     max-width: 200px;

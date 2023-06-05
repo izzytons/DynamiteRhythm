@@ -1,3 +1,16 @@
+// Imports
+import * as gigManager from "./gigManager.js"
+
+// OnLoad Event
+window.onload = async () => {
+    if (document.body.classList.contains("upcomingshows")){
+        PopulateCalendarPage();
+    }
+    else if (document.body.classList.contains("editcalendar")){
+        PopulateEditCalendarPage();
+    }
+}
+
 // Local variables
 var monthNames = [
     "January", 
@@ -15,7 +28,7 @@ var monthNames = [
 ];
 
 // Create single calendar html object for a gig object
-CreateCalendarObject = function(gig){
+function CreateCalendarObject(gig){
 
     const eventContainer = document.getElementById("event_container");
 
@@ -71,13 +84,17 @@ CreateCalendarObject = function(gig){
 }
 
 // Display upcoming shows on html page using data returned from API
-PopulateCalendarPage = function(gigs){
+async function PopulateCalendarPage(){
+    console.log("Running PopulateCalendarPage");
+
     const eventContainer = document.getElementById("event_container");
+    const gigsFromDB = await gigManager.GetGigs(); // get gig list from DB
+    console.log(`Gigs retrieved from API: ${JSON.stringify(gigsFromDB)}`);
 
     // Filter out past gigs
     const currentDate = new Date();
     currentDate.setHours(0,0,0,0); //reset the time for date comparison regardless of time
-    const futureGigs = gigs.filter((x) => { 
+    const futureGigs = gigsFromDB.filter((x) => { 
         const gigDate = new Date(x.DateAndTime).setHours(0,0,0,0);
         return gigDate >= currentDate;
     });
@@ -117,8 +134,62 @@ PopulateCalendarPage = function(gigs){
     }
 }
 
+// Display upcoming shows on html page using data returned from API with update, delete, and create functionality
+async function PopulateEditCalendarPage(){
+    console.log("Running PopulateEditCalendarPage");
+    const eventContainer = document.getElementById("event_container");
+    const gigsFromDB = await gigManager.GetGigs(); // get gig list from DB
+    console.log(`Gigs retrieved from API: ${JSON.stringify(gigsFromDB)}`);
+
+    // Filter out past gigs
+    const currentDate = new Date();
+    currentDate.setHours(0,0,0,0); //reset the time for date comparison regardless of time
+    const futureGigs = gigsFromDB.filter((x) => { 
+        const gigDate = new Date(x.DateAndTime).setHours(0,0,0,0);
+        return gigDate >= currentDate;
+    });
+
+    console.log(`future gigs: ${JSON.stringify(futureGigs)}`);
+
+    // Group gigs by year
+    const groupedGigs = GroupByYear(futureGigs);
+    console.log(`Gigs grouped by year: ${JSON.stringify(groupedGigs)}`);
+
+    groupedGigs.forEach((group) => {
+        // Create header for year
+        const yearHeader = document.createElement("h3");
+        yearHeader.classList.add("year");
+        yearHeader.innerHTML = group[0];
+        eventContainer.appendChild(yearHeader);
+
+        // Add calendar objects for each gig in given year (group key)
+        group[1].forEach((currentGig) => {
+            CreateCalendarObject(currentGig);
+            const modificationButtons = document.createElement("div");
+            const updateButton = document.createElement("button");
+            const deleteButton = document.createElement("button");
+            updateButton.innerText = "Update";
+            deleteButton.innerText = "Delete";
+            modificationButtons.classList.add("modification-buttons");
+            deleteButton.id = "deletegig-button";
+            deleteButton.addEventListener("click", async () => await gigManager.DeleteGig(currentGig._id));
+
+            modificationButtons.appendChild(updateButton);
+            modificationButtons.appendChild(deleteButton);
+            eventContainer.appendChild(modificationButtons);
+        });
+    });
+
+    // Add create gig button at bottom of gigs list
+    const createGigButton = document.createElement("button");
+    createGigButton.innerText = "Add New Gig";
+    createGigButton.addEventListener("click", () => {}); // TODO: ADD PUT REQUEST IN GIGMANAGER AND ADD FUNCTIONALITY HERE
+    eventContainer.appendChild(createGigButton);
+}
+
+
 // Function to group gig list by year
-GroupByYear = function(gigs){
+function GroupByYear(gigs){
     const gigList = gigs;
     const groupedResult = gigList.reduce((group, gig) => {
         const gigDateAndTime = new Date(gig.DateAndTime);
