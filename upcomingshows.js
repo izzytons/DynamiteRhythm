@@ -1,5 +1,6 @@
 // Imports
 import * as gigManager from "./gigManager.js"
+import * as dateHelper from "./datehelper.js"
 
 // Local variables
 var monthNames = [
@@ -30,8 +31,8 @@ window.onload = async () => {
     else if (document.body.classList.contains("editcalendar")){
         PopulateEditCalendarPage();
         closeButton.addEventListener("click", () => CloseModal());
-        document.getElementById('GigDateAndTime').value = new Date().toLocaleString();
-    }
+        console.log(`current date: ${currentDate.toLocaleString('en-us')}`);
+        document.getElementById('GigDateAndTime').value = dateHelper.formatDate(new Date());
 }
 
 // Create single calendar html object for a gig object
@@ -74,7 +75,8 @@ function CreateCalendarObject(gig){
     eventDescription.appendChild(locationParagraph);
 
     // Fill in information
-    const gigDateAndTime = new Date(gig.DateAndTime);
+    const gigDateAndTime = dateHelper.ConvertFromISO(gig.DateAndTime);
+    console.log(gigDateAndTime);
     eventDay.innerHTML = gigDateAndTime.getDate();
     eventMonth.innerHTML = monthNames[gigDateAndTime.getMonth()];
     eventTime.innerHTML = "<img src=images/time.png alt=\"\" />";
@@ -188,7 +190,7 @@ async function PopulateEditCalendarPage(){
     // Add create gig button at bottom of gigs list
     const createGigButton = document.createElement("button");
     createGigButton.innerText = "Add New Gig";
-    createGigButton.addEventListener("click", async () => await OnCreateGig()); // TODO: ADD POST REQUEST IN GIGMANAGER AND ADD FUNCTIONALITY HERE
+    createGigButton.addEventListener("click", async () => await OnCreateGig());
     eventContainer.appendChild(createGigButton);
 }
 
@@ -205,7 +207,7 @@ function OpenEditModal(currentGig){
     const gigLocationInput = document.getElementById("GigLocation");
     gigLocationInput.value = currentGig.Location;
     const gigDateAndTimeInput = document.getElementById("GigDateAndTime");
-    gigDateAndTimeInput.value = new Date(currentGig.DateAndTime).toLocaleString();
+    gigDateAndTimeInput.value = dateHelper.formatDate(dateHelper.ConvertFromISO(new Date(currentGig.DateAndTime)));
 
     // Assign submit functionality
     const form = document.getElementById("updategig-form");
@@ -254,6 +256,7 @@ async function EditGigSubmit(currentGig){
     const gigDescriptionInput = document.getElementById("GigDescription");
     const gigLocationInput = document.getElementById("GigLocation");
     const gigDateAndTimeInput = document.getElementById("GigDateAndTime");
+    console.log(gigDateAndTimeInput.value);
 
     const updatedGig = {
         Title: gigTitleInput.value,
@@ -313,6 +316,9 @@ function CloseModal(){
     modal.classList.remove('active')
     overlay.classList.remove('active')
     ClearForm();
+    // remove form submission event listener by replacing with new clone
+    const form = document.getElementById("updategig-form");
+    form.replaceWith(form.cloneNode(true));
 }
 
 function ClearEvents(){
@@ -330,7 +336,7 @@ function ClearForm(){
     gigTitleInput.value = "";
     gigDescriptionInput.value = "";
     gigLocationInput.value = "";
-    gigDateAndTimeInput.value = new Date().toLocaleString();
+    gigDateAndTimeInput.value = dateHelper.formatDate(new Date());
 }
 
 // Function to group gig list by year
@@ -351,7 +357,7 @@ function GroupByYear(gigs){
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 // EXAMPLE EVENT
-{/* <div class = "event">
+/* <div class = "event">
             <div class = "event_left">
                 <div class = "event_date">
                     <div class = "event_day">23</div>
