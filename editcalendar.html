@@ -26,20 +26,33 @@
     <script src="jquery.min.js"></script>
     <script src="menu.js"></script>
     <script type="module" src="upcomingshows.js"></script>
-
-    <!--Retrieve list of gigs from DB and populate event container-->
-    <script>        
-        window.onload = async () => {
-            await PopulateEditCalendarPage();
-        }      
-    </script>
-    
     
     <body>
     <div class = "event_container" id = "event_container"> 
         <!--Will be populated dynamically via script above-->
     </div>
-    
+
+    <!-- Edit Gig Modal -->
+    <div class="modal" id="update-gig-modal">
+        <div class="modal-header">
+          <div class="title">Edit Gig</div>
+          <button data-close-button class="close-button" id="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="updategig-form">
+                <label for: GigTitle>Gig Title:</label>
+                <input type="text" id="GigTitle" name="GigTitle"><br>
+                <label for: GigDescription>Description:</label>
+                <input type="text" id="GigDescription" name="GigDescription"><br>
+                <label for: GigLocation>Location/Address:</label>
+                <input type="text" id="GigLocation" name="GigLocation"><br>
+                <label for: GigDateAndTime>Date and Time:</label>
+                <input type="datetime-local" id="GigDateAndTime" name="GigDateAndTime"><br>
+                <button type="submit" id="updategig-submit-button">Update</button>
+            </form>
+        </div>
+      </div>
+      <div id="overlay"></div>    
 
     </body>
     

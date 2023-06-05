@@ -1,16 +1,6 @@
 // Imports
 import * as gigManager from "./gigManager.js"
 
-// OnLoad Event
-window.onload = async () => {
-    if (document.body.classList.contains("upcomingshows")){
-        PopulateCalendarPage();
-    }
-    else if (document.body.classList.contains("editcalendar")){
-        PopulateEditCalendarPage();
-    }
-}
-
 // Local variables
 var monthNames = [
     "January", 
@@ -27,10 +17,25 @@ var monthNames = [
     "December"
 ];
 
+const overlay = document.getElementById("overlay");
+const modal = document.getElementById("update-gig-modal");
+const closeButton = document.getElementById("close-button");
+const eventContainer = document.getElementById("event_container");
+
+// OnLoad Event
+window.onload = async () => {
+    if (document.body.classList.contains("upcomingshows")){
+        PopulateCalendarPage();
+    }
+    else if (document.body.classList.contains("editcalendar")){
+        PopulateEditCalendarPage();
+        closeButton.addEventListener("click", () => CloseModal());
+        document.getElementById('GigDateAndTime').value = new Date().toLocaleString();
+    }
+}
+
 // Create single calendar html object for a gig object
 function CreateCalendarObject(gig){
-
-    const eventContainer = document.getElementById("event_container");
 
     // Create event divs
     const event = document.createElement("div");
@@ -70,7 +75,7 @@ function CreateCalendarObject(gig){
 
     // Fill in information
     const gigDateAndTime = new Date(gig.DateAndTime);
-    eventDay.innerHTML = gigDateAndTime.getDay();
+    eventDay.innerHTML = gigDateAndTime.getDate();
     eventMonth.innerHTML = monthNames[gigDateAndTime.getMonth()];
     eventTime.innerHTML = "<img src=images/time.png alt=\"\" />";
     eventTime.innerHTML += gigDateAndTime.toLocaleString('en-us', {
@@ -87,7 +92,6 @@ function CreateCalendarObject(gig){
 async function PopulateCalendarPage(){
     console.log("Running PopulateCalendarPage");
 
-    const eventContainer = document.getElementById("event_container");
     const gigsFromDB = await gigManager.GetGigs(); // get gig list from DB
     console.log(`Gigs retrieved from API: ${JSON.stringify(gigsFromDB)}`);
 
@@ -168,11 +172,12 @@ async function PopulateEditCalendarPage(){
             const modificationButtons = document.createElement("div");
             const updateButton = document.createElement("button");
             const deleteButton = document.createElement("button");
-            updateButton.innerText = "Update";
+            updateButton.innerText = "Edit";
             deleteButton.innerText = "Delete";
             modificationButtons.classList.add("modification-buttons");
             deleteButton.id = "deletegig-button";
-            deleteButton.addEventListener("click", async () => await gigManager.DeleteGig(currentGig._id));
+            deleteButton.addEventListener("click", async () => await OnDeleteGig(currentGig._id));
+            updateButton.addEventListener("click", () => OpenEditModal(currentGig))
 
             modificationButtons.appendChild(updateButton);
             modificationButtons.appendChild(deleteButton);
@@ -183,10 +188,150 @@ async function PopulateEditCalendarPage(){
     // Add create gig button at bottom of gigs list
     const createGigButton = document.createElement("button");
     createGigButton.innerText = "Add New Gig";
-    createGigButton.addEventListener("click", () => {}); // TODO: ADD PUT REQUEST IN GIGMANAGER AND ADD FUNCTIONALITY HERE
+    createGigButton.addEventListener("click", async () => await OnCreateGig()); // TODO: ADD POST REQUEST IN GIGMANAGER AND ADD FUNCTIONALITY HERE
     eventContainer.appendChild(createGigButton);
 }
 
+// Function to open update gig modal and fill in existing info
+function OpenEditModal(currentGig){
+    modal.classList.add("active");
+    overlay.classList.add("active");
+
+    // Fill in existing gig data by getting elements and updating values
+    const gigTitleInput = document.getElementById("GigTitle");
+    gigTitleInput.value = currentGig.Title;
+    const gigDescriptionInput = document.getElementById("GigDescription");
+    gigDescriptionInput.value = currentGig.Description;
+    const gigLocationInput = document.getElementById("GigLocation");
+    gigLocationInput.value = currentGig.Location;
+    const gigDateAndTimeInput = document.getElementById("GigDateAndTime");
+    gigDateAndTimeInput.value = new Date(currentGig.DateAndTime).toLocaleString();
+
+    // Assign submit functionality
+    const form = document.getElementById("updategig-form");
+    form.addEventListener("submit", async (event) => { 
+        event.preventDefault();
+        await EditGigSubmit(currentGig);
+    });
+
+    console.log(`Edit Gig Modal Opened for gig: ${currentGig._id}`);
+}
+
+// Function to create gig and reload page
+async function OnCreateGig(){
+    // open empty gig modal
+    modal.classList.add("active");
+    overlay.classList.add("active");
+
+    // Assign submit functionality
+    const form = document.getElementById("updategig-form");
+    const submitButton = document.getElementById("updategig-submit-button");
+    submitButton.innerText = "Create";
+    form.addEventListener("submit", async (event) => { 
+        event.preventDefault();
+        await CreateGigSubmit();
+    });
+}
+
+// Function to delete gig and reload page
+async function OnDeleteGig(gigId){
+    const response = await gigManager.DeleteGig(gigId); // Delete gig from DB
+    if (response){
+        alert("gig successfully deleted");
+    }
+    else{
+        alert("deletion was unsuccessful, let Izzy know");
+    }
+    ReloadEditPage();
+}
+
+// Function to make PUT request to update selected gig
+async function EditGigSubmit(currentGig){
+    console.log("Update Gig Form Submitted");
+
+    // Get updated gig information
+    const gigTitleInput = document.getElementById("GigTitle");
+    const gigDescriptionInput = document.getElementById("GigDescription");
+    const gigLocationInput = document.getElementById("GigLocation");
+    const gigDateAndTimeInput = document.getElementById("GigDateAndTime");
+
+    const updatedGig = {
+        Title: gigTitleInput.value,
+        Description: gigDescriptionInput.value,
+        Location: gigLocationInput.value,
+        DateAndTime: gigDateAndTimeInput.value,
+        Band: "DynamiteRhythm"
+    }
+
+    var response = await gigManager.UpdateGig(currentGig._id, updatedGig);
+
+    if(response){
+        alert("successfully updated gig");
+    }
+    else{
+        alert("update was unsuccessful, let Izzy know");
+    }
+
+    CloseModal();
+    ReloadEditPage();
+}
+
+async function CreateGigSubmit(){
+    // Get new gig information
+    const gigTitleInput = document.getElementById("GigTitle");
+    const gigDescriptionInput = document.getElementById("GigDescription");
+    const gigLocationInput = document.getElementById("GigLocation");
+    const gigDateAndTimeInput = document.getElementById("GigDateAndTime");
+
+    const newGig = {
+        Title: gigTitleInput.value,
+        Description: gigDescriptionInput.value,
+        Location: gigLocationInput.value,
+        DateAndTime: gigDateAndTimeInput.value,
+        Band: "DynamiteRhythm"
+    }
+    const response = await gigManager.CreateGig(newGig);
+
+    if (response){
+        alert("gig created successfully");
+    }
+    else{
+        alert("error creating gig, let Izzy know");
+    }
+
+    CloseModal();
+    ReloadEditPage();
+}
+
+function ReloadEditPage(){
+    ClearEvents();
+    PopulateEditCalendarPage();
+    ClearForm();
+}
+
+function CloseModal(){
+    modal.classList.remove('active')
+    overlay.classList.remove('active')
+    ClearForm();
+}
+
+function ClearEvents(){
+    while(eventContainer.firstChild){
+        eventContainer.removeChild(eventContainer.firstChild);
+    }
+}
+
+function ClearForm(){
+    const gigTitleInput = document.getElementById("GigTitle");
+    const gigDescriptionInput = document.getElementById("GigDescription");
+    const gigLocationInput = document.getElementById("GigLocation");
+    const gigDateAndTimeInput = document.getElementById("GigDateAndTime");
+
+    gigTitleInput.value = "";
+    gigDescriptionInput.value = "";
+    gigLocationInput.value = "";
+    gigDateAndTimeInput.value = new Date().toLocaleString();
+}
 
 // Function to group gig list by year
 function GroupByYear(gigs){
@@ -201,6 +346,7 @@ function GroupByYear(gigs){
 
     return Object.entries(groupedResult);
 }
+
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
