@@ -127,7 +127,7 @@ footer ul li img:hover{
 }
 
 #bodypic{
-    width: 90vw;
+    width: 90%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -327,7 +327,8 @@ td.selected{
     box-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.4);
     display: flex;
     border-radius: 8px;
-    margin: 32px 0;
+    margin: 32px auto;
+    max-width: 80vw;
 }
 
 .event .event_left{
@@ -358,10 +359,12 @@ td.selected{
     flex-direction: column;
     justify-content: center;
     padding: 0 24px;
+    width: 100%;
 }
 
 .event .event_right h3.event_title{
     font-size: 24px;
+    font-family: sans-serif;
     margin: 24px 0 10px 0;
     color: black;
     text-transform: uppercase;
@@ -917,7 +920,7 @@ button[type=submit]:hover
         flex-direction: column;
     }
     
-    .event .event_left{
+    .event .event_left {
         padding: 0;
         border-radius: 8px 8px 0 0;
     }
@@ -930,6 +933,10 @@ button[type=submit]:hover
     
     .event .event_left .event_date{
         padding: 10px 0;
+    }
+
+    .event_right{
+        max-width: 70vw;
     }
     
     .contact_wrapper{
