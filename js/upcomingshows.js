@@ -236,6 +236,10 @@ async function OnCreateGig(){
     modal.classList.add("active");
     overlay.classList.add("active");
 
+    // Update form current date
+    const gigDateAndTimeInput = document.getElementById("GigDateAndTime");
+    gigDateAndTimeInput.value = dateHelper.formatDate(new Date());
+
     // Assign submit functionality
     const form = document.getElementById("updategig-form");
     const submitButton = document.getElementById("updategig-submit-button");
@@ -248,14 +252,18 @@ async function OnCreateGig(){
 
 // Function to delete gig and reload page
 async function OnDeleteGig(gigId){
-    const response = await gigManager.DeleteGig(gigId); // Delete gig from DB
-    if (response){
-        alert("gig successfully deleted");
-    }
-    else{
-        alert("deletion was unsuccessful, let Izzy know");
-    }
-    ReloadEditPage();
+    const userConfirmation = confirm('Are you sure you want to delete this gig?'); // confirm operation before proceeding
+
+    if (userConfirmation){
+        const response = await gigManager.DeleteGig(gigId); // Delete gig from DB
+        if (response){
+            alert("gig successfully deleted");
+        }
+        else{
+            alert("deletion was unsuccessful, let Izzy know");
+        }
+        ReloadEditPage();
+    } 
 }
 
 // Function to make PUT request to update selected gig
