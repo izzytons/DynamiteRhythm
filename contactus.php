@@ -38,8 +38,8 @@
     </header>
     
     
-    <script src="jquery.min.js"></script>
-    <script src="menu.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/menu.js"></script>
     
     
     

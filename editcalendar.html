@@ -1,11 +1,11 @@
 <html>
     <head>
-    <title>Dynamite Rhythm - Calendar</title> 
+    <title>Edit Calendar</title> 
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="shortcut icon" href="images/DynamiteLogo.png">
     <link rel="stylesheet" type ="text/css" href="stylesheetV2.css"/>
 </head>
-<body class="upcomingshows">
+<body class="editcalendar">
    <header class="index">
        <a href="index.html"><img src="images/DynamiteLogo.png" width="100px"></a>
        <a class=burger-nav></a>
@@ -13,7 +13,7 @@
             <div class="navbar2">
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li class="active"><a href="upcomingshows.html">Calendar</a></li>
+                    <li><a href="upcomingshows.html">Calendar</a></li>
                     <li><a href="media.html">Photo Gallery</a></li>
                     <li><a href="about.html">About the Band</a></li>
                     <li><a href="songs.html">Song List</a></li>
@@ -25,13 +25,35 @@
     
     <script src="./js/jquery.min.js"></script>
     <script src="./js/menu.js"></script>
-    <script type="module" src="./js/upcomingshows.js"></script>   
+    <script type="module" src="./js/upcomingshows.js"></script>
     
     <body>
     <div class = "event_container" id = "event_container"> 
         <!--Will be populated dynamically via script above-->
     </div>
-    <!--END GIG LIST-->
+
+    <!-- Edit Gig Modal -->
+    <div class="modal" id="update-gig-modal">
+        <div class="modal-header">
+          <div class="title">Edit Gig</div>
+          <button data-close-button class="close-button" id="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="updategig-form">
+                <label for: GigTitle>Gig Title:</label>
+                <input type="text" id="GigTitle" name="GigTitle"><br>
+                <label for: GigDescription>Description:</label>
+                <textarea id="GigDescription" name="GigDescription"></textarea><br>
+                <label for: GigLocation>Location/Address:</label>
+                <textarea id="GigLocation" name="GigLocation"></textarea><br>
+                <label for: GigDateAndTime>Date and Time:</label>
+                <input type="datetime-local" id="GigDateAndTime" name="GigDateAndTime"><br>
+                <button type="submit" id="updategig-submit-button">Update</button>
+            </form>
+        </div>
+      </div>
+      <div id="overlay"></div>    
+
     </body>
     
     <!--FOOTER-->
