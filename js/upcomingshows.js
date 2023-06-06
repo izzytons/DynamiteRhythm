@@ -48,8 +48,6 @@ function CreateCalendarObject(gig){
     const eventTitle = document.createElement("h3");
     const eventDescription = document.createElement("div");
     const eventTime = document.createElement("div");
-    const descParagraph = document.createElement("p");
-    const locationParagraph = document.createElement("p");
 
     event.classList.add("event");
     eventRight.classList.add("event_right");
@@ -71,8 +69,6 @@ function CreateCalendarObject(gig){
     eventRight.appendChild(eventTitle);
     eventRight.appendChild(eventDescription);
     eventRight.appendChild(eventTime);
-    eventDescription.appendChild(descParagraph);
-    eventDescription.appendChild(locationParagraph);
 
     // Fill in information
     const gigDateAndTime = dateHelper.ConvertFromISO(gig.DateAndTime);
@@ -86,8 +82,23 @@ function CreateCalendarObject(gig){
         hour12: true
     });
     eventTitle.innerHTML = gig.Title;
-    descParagraph.textContent = gig.Description;
-    locationParagraph.textContent = gig.Location;
+
+        // create description and location paragraphs for each line from input
+    const descriptionLines = gig.Description.split("\n");
+    const locationLines = gig.Location.split("\n");
+
+    descriptionLines.forEach((line) => {
+        const descParagraph = document.createElement("p");
+        descParagraph.textContent = line;
+        eventDescription.appendChild(descParagraph);
+    });
+    eventDescription.appendChild(document.createElement("br"));
+    locationLines.forEach((line) => {
+        const locationParagraph = document.createElement("p");
+        locationParagraph.textContent = line;
+        eventDescription.appendChild(locationParagraph);
+    });
+    
 }
 
 // Display upcoming shows on html page using data returned from API
@@ -256,7 +267,6 @@ async function EditGigSubmit(currentGig){
     const gigDescriptionInput = document.getElementById("GigDescription");
     const gigLocationInput = document.getElementById("GigLocation");
     const gigDateAndTimeInput = document.getElementById("GigDateAndTime");
-    console.log(gigDateAndTimeInput.value);
 
     const updatedGig = {
         Title: gigTitleInput.value,
@@ -280,6 +290,7 @@ async function EditGigSubmit(currentGig){
 }
 
 async function CreateGigSubmit(){
+    console.log("Create Gig Form Submitted");
     // Get new gig information
     const gigTitleInput = document.getElementById("GigTitle");
     const gigDescriptionInput = document.getElementById("GigDescription");
