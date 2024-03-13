@@ -310,7 +310,8 @@ async function CreateGigSubmit(){
         Description: gigDescriptionInput.value,
         Location: gigLocationInput.value,
         DateAndTime: gigDateAndTimeInput.value,
-        Band: "DynamiteRhythm"
+        Band: "DynamiteRhythm",
+        IzzyPlaying: true
     }
     const response = await gigManager.CreateGig(newGig);
 
