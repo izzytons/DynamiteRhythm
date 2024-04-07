@@ -37,9 +37,7 @@ window.onload = async () => {
         document.getElementById('GigDateAndTime').value = dateHelper.formatDate(new Date());
     }
 
-    window.addEventListener("load", () => {
-        window.dispatchEvent(customLoadedEvent);
-    });
+window.dispatchEvent(customLoadedEvent);
 
 // Create single calendar html object for a gig object
 function CreateCalendarObject(gig){
