@@ -116,6 +116,10 @@ async function PopulateCalendarPage(){
         const gigDate = new Date(x.DateAndTime).setHours(0,0,0,0);
         return gigDate >= currentDate;
     });
+    const pastGigs = gigsFromDB.filter((x) => { 
+        const gigDate = new Date(x.DateAndTime).setHours(0,0,0,0);
+        return gigDate < currentDate;
+    });
 
     //console.log(`future gigs: ${JSON.stringify(futureGigs)}`);
 
@@ -133,23 +137,14 @@ async function PopulateCalendarPage(){
         eventContainer.appendChild(noGigsDiv);
     } 
     else{
-        // Group gigs by year
-        const groupedGigs = GroupByYear(futureGigs);
-        //console.log(`Gigs grouped by year: ${JSON.stringify(groupedGigs)}`);
-
-        groupedGigs.forEach((group) => {
-            // Create header for year
-            const yearHeader = document.createElement("h3");
-            yearHeader.classList.add("year");
-            yearHeader.innerHTML = group[0];
-            eventContainer.appendChild(yearHeader);
-
-            // Add calendar objects for each gig in given year (group key)
-            group[1].forEach((currentGig) => {
-                CreateCalendarObject(currentGig)
-            });
-        });
+        CreateCalendarDOMObjects(futureGigs);
     }
+
+    const pastGigsButton = document.createElement("button");
+    pastGigsButton.id = 'PastGigsButton';
+    pastGigsButton.textContent = "View Past Gigs";
+    pastGigsButton.addEventListener("click", () => { OnPastGigsButtonClick(pastGigs) });
+    eventContainer.appendChild(pastGigsButton);
 }
 
 // Display upcoming shows on html page using data returned from API with update, delete, and create functionality
@@ -368,6 +363,39 @@ function GroupByYear(gigs){
     }, {});
 
     return Object.entries(groupedResult);
+}
+
+// Function to create calendar DOM objects from list of gigs
+function CreateCalendarDOMObjects(gigs){
+    // Group gigs by year
+    const groupedGigs = GroupByYear(gigs);
+
+    groupedGigs.forEach((group) => {
+        // Create header for year
+        const yearHeader = document.createElement("h3");
+        yearHeader.classList.add("year");
+        yearHeader.innerHTML = group[0];
+        eventContainer.appendChild(yearHeader);
+
+        // Add calendar objects for each gig in given year (group key)
+        group[1].forEach((currentGig) => {
+            CreateCalendarObject(currentGig)
+        });
+    });
+}
+
+// Function to handle creating past gig calendar objects and updating button
+function OnPastGigsButtonClick(gigs){
+    // Create Past Gigs Header and populate calendar objects
+    const pastGigHeader = document.createElement("h3");
+    pastGigHeader.classList.add("pastgigs-header");
+    pastGigHeader.innerHTML = "PAST GIGS";
+    eventContainer.appendChild(pastGigHeader);
+    CreateCalendarDOMObjects(gigs);
+
+    // Remove past gigs button
+    var pastGigsButton = document.getElementById("PastGigsButton");
+    pastGigsButton.remove();
 }
 
 

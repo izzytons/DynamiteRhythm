@@ -403,6 +403,12 @@ td.selected{
     background-color: red;
 }
 
+.event_container h3.pastgigs-header{
+    font-size: 50px;
+    text-align: center;
+    padding-top: 20px;
+}
+
 /*Update Gig Modal*/
 .modal {
   position: fixed;
