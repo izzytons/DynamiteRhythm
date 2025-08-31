@@ -21,7 +21,7 @@
 </head>
 <body>
    <header class="index">
-       <a href="index.html"><img src="images/DynamiteLogo.png" width="100px"></a>
+       <a href="index.html"><img src="images/tinified/DynamiteLogo.png" width="100px"></a>
        <a class=burger-nav></a>
            <div class="navbarcontainer2">
             <div class="navbar2">
@@ -32,6 +32,8 @@
                     <li><a href="about.html">About the Band</a></li>
                     <li><a href="songs.html">Song List</a></li>
                     <li class="active"><a href="contactus.php">Contact Us</a></li>
+                    <li><a href="https://www.bonfire.com/store/dynamite-rhythm/?utm_source=copy_link&utm_medium=store_page_share&utm_campaign=dynamite-rhythm&utm_content=default" target="_blank">
+                        Buy Merch</a></li>
                 </ul>
             </div>
         </div>
