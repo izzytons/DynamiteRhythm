@@ -646,7 +646,7 @@ button:hover{
 /*about*/
 
 #aboutbody{
-    margin: auto;
+    margin: 120px auto;
     min-height: calc(100% - 75px);
     max-width: 2000px;
 }
@@ -796,12 +796,11 @@ button[type=submit]:hover
     
     .contact_wrapper{
         flex-direction: column-reverse;
-        margin-top: 110px;
     }
     
 }
 
-@media only screen and (max-width: 980px)
+@media only screen and (max-width: 1050px)
 {
     
     /*remove the nav-bar logo*/
@@ -818,10 +817,8 @@ button[type=submit]:hover
     
 }
 
-@media only screen and (max-width: 860px)
-{   
-    
-    
+@media only screen and (max-width: 980px)
+{       
     .burger-nav
     {
         display: block;
@@ -912,7 +909,7 @@ button[type=submit]:hover
     }
     
     #bodypic.open{
-        margin-top : 285px;
+        margin-top : 330px;
     }
     
     #indexBio p{
@@ -930,6 +927,14 @@ button[type=submit]:hover
     #mediabody.open{
         margin-top: 285px;
     }
+
+    .gallery img{
+        width: 40%;
+    }
+
+    #aboutbody{
+        margin-top: 50px;
+    }
     
     #aboutbody img{
         padding: 0;
@@ -939,8 +944,8 @@ button[type=submit]:hover
         margin-top: 30px;
     }
     
-    #aboutimg.open{
-        margin-top: 315px;
+    #aboutbody.open{
+        margin-top: 380px;
     }
     
     #songlist{
@@ -955,7 +960,7 @@ button[type=submit]:hover
     }
     
     #songlist.open{
-        margin-top: 350px;
+        margin-top: 385px;
     }
     
     /*
@@ -980,7 +985,7 @@ button[type=submit]:hover
     }
     
     .event_container.open{
-        margin-top: 340px;
+        margin-top: 400px;
     }
     
     .event{
@@ -1017,7 +1022,11 @@ button[type=submit]:hover
     }
     
     .contact_div.open{
-        margin-top: 250px;
+        margin-top: 390px;
+    }
+
+    .contact_div h2{
+        margin-top: 0px;
     }
     
     .bio p{
