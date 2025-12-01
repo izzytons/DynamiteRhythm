@@ -10,7 +10,7 @@ $(document).ready(function(){
                 $("footer").toggleClass("open");
                 $("#calendarcontainer").toggleClass("open");
                 $("#mediabody").toggleClass("open");
-                $("#aboutimg").toggleClass("open");
+                $("#aboutbody").toggleClass("open");
                 $("#songlist").toggleClass("open");
                 $(".contactform").toggleClass("open");  
                 $(".event_container").toggleClass("open");  
