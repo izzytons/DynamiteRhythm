@@ -170,6 +170,34 @@ video{
     margin-bottom: 50px;
 }
 
+.index-popup-body{
+    width: 90%;
+    margin: auto;
+}
+
+.index-popup-body img{
+    max-width: 250px;
+    max-height: 250px;
+    border: 1px solid rebeccapurple;
+    float: left;
+    margin-right: 20px;
+}
+
+#newsongs-popup{
+    text-align: center;
+}
+
+#newsonglist{
+    max-width: 250px;
+    text-align: left;
+    margin: auto;
+}
+
+#newsonglist li.title{
+    text-decoration: none;
+    font-weight: bold;
+}
+
 
 
 
@@ -426,6 +454,8 @@ td.selected{
   background-color: white;
   width: 800px;
   max-width: 80%;
+  max-height: 80%;
+  overflow-y: scroll;
 }
 
 .modal.active {

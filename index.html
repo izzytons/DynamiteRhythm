@@ -38,6 +38,41 @@
         </div>
     </header>
     
+    <!-- OPTIONAL POPUP ON PAGE LOAD -->
+     <div class="modal" id="index-popup">
+        <div class="modal-header">
+          <div class="title">Meet our newest band member!</div>
+          <button data-close-button class="close-button" id="close-button">&times;</button>
+        </div>
+        <div class="index-popup-body">
+            <img src="images/jeff_biopic.jpg">
+            <h2>Jeff Meyer</h2>
+            <p>Jeff has been playing bass guitar since his teenage years, quickly developing a deep love for the instrument. Over the years, he has performed in numerous musical theater productions throughout southern New England, as well as with various local bands.
+            <br>When he's not on stage, Jeff enjoys spending quality time with close friends and family, as well as getting outdoors for camping and cheering on the Patriots. He lives in Putnam, CT with his wife and their two amazing boys. A 2008 graduate of Johnson & Wales University, he holds degrees in Marketing and Management. Professionally, he has built a career in the insurance industry—but music has always remained his true passion.</p>
+            <br>
+            <br>
+            <div id="newsongs-popup">
+                <h2>We're also learning some exciting new material. <br>You won't want to miss us this summer!</h2>
+                <div id = "newsonglist">
+                <ul>
+                    <li class="title">New songs include:</li>
+                    <li>Hungry Heart</li>
+                    <li>Power of Love</li>
+                    <li>Come Sail Away</li>
+                    <li>Footloose</li>
+                    <li>Still Rock and Roll to Me</li>
+                    <li>Walking on Sunshine</li>
+                    <li>Jack and Diane</li>
+                    <li>She's Gone</li>
+                    <li>I Want You to Want Me</li>
+                    <li>Crazy Little Thing Called Love</li>
+                    <li>Reelin in the Years</li>
+                </ul>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div id="overlay"></div>    
      
     
     
@@ -80,6 +115,7 @@
 
     <script src="./js/jquery.min.js"></script>
     <script src="./js/menu.js"></script>
+    <script type="module" src="./js/index-popup.js" defer></script> 
     
     
     
